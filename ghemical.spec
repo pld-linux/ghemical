@@ -1,26 +1,28 @@
 # TODO:
-# - use external openbabel (?)
 # - use external miniMOPAC (? included is modified, I think...)
 # - src/target3/open.o  - don't use tempnam
+# - use external openbabel
 
 Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM
 Name:		ghemical
-Version:	0.82
+Version:	0.90
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
-Patch0:		%{name}-includes.patch
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
-Buildrequires:	python-numpy-devel
 BuildRequires:	gcc-g77
 BuildRequires:	glut-devel
 BuildRequires:	gtkglarea-devel
 BuildRequires:	gtk+-devel
+BuildRequires:	libglade-gnome-devel
+BuildRequires:	openbabel-devel
+Buildrequires:	python-numpy-devel
+Requires:	openbabel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -49,17 +51,18 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__autoconf}
 %configure 
 #	--enable-mpqc
-%{__make}
+%{__make} \
+	CFLAGS="%{rpmcflags} -I/usr/include/python2.2/Numeric" \
+	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.2/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\""
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_applnkdir}/Scientific}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_applnkdir}/Scientific/Chemistry}
 install -d $RPM_BUILD_ROOT%{_datadir}/{gnome/help/%{name}/C,pixmaps}
 install -d $RPM_BUILD_ROOT%{_pkgdir}/parameters/{builder,mm2param,mm1param/{stable,unstable}}
 
@@ -70,7 +73,7 @@ install bin/parameters/mm1param/stable/*.txt	$RPM_BUILD_ROOT%{_pkgdir}/parameter
 install bin/parameters/mm1param/unstable/*.txt	$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm1param/unstable
 install bin/parameters/mm2param/*.txt		$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm2param
 install openbabel/*.txt				$RPM_BUILD_ROOT%{_pkgdir}
-install %{SOURCE1}				$RPM_BUILD_ROOT%{_applnkdir}/Scientific
+install %{SOURCE1}				$RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
 install %{SOURCE2}				$RPM_BUILD_ROOT%{_datadir}/pixmaps
 
 %clean
@@ -85,4 +88,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_pkgdir}
 %{_pkgdir}/*
 %{_datadir}/pixmaps/*.xpm
-%{_applnkdir}/Scientific/*.desktop
+%{_applnkdir}/Scientific/Chemistry/*.desktop

@@ -5,7 +5,7 @@
  AR=             @AR@
  
 -CFLAGS =	@CFLAGS@
-+INCLUDES =	-I/usr/include/python2.2/Numeric/
++INCLUDES =	-I/usr/include/python2.2/Numeric
 +CFLAGS =	@CFLAGS@ $(INCLUDES)
  
  SRC =		aababc.c addfck.c addhcr.c addnuc.c analyt.c \

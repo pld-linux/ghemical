@@ -1,0 +1,37 @@
+--- ghemical-0.90/Makefile.in.orig	Mon Jun 17 11:52:19 2002
++++ ghemical-0.90/Makefile.in	Fri Jun 27 14:45:34 2003
+@@ -64,26 +64,26 @@
+ 	@echo ""
+ 	@echo "Creating directories (if needed)..."
+ 	-@for i in $(create_dirs); do \
+-		$(top_srcdir)/mkinstalldirs $$i; \
++		$(top_srcdir)/mkinstalldirs $(DESTDIR)$$i; \
+ 	done && test -z "$$fail"
+ 	@echo "Installing ghemical"
+-	$(INSTALL_PROGRAM) bin/ghemical $(bindir)
++	$(INSTALL_PROGRAM) bin/ghemical $(DESTDIR)$(bindir)
+ 	@echo ""
+ 	@echo "Copying parameter files"
+-	cp -r -p $(top_srcdir)/bin/parameters $(version_dest);
++	cp -r -p $(top_srcdir)/bin/parameters $(DESTDIR)$(version_dest);
+ 	@echo ""
+ 	@echo "Copying libglade data files"
+-	cp -p $(top_srcdir)/src/target3/glade/*.glade $(version_dest)/glade;
++	cp -p $(top_srcdir)/src/target3/glade/*.glade $(DESTDIR)$(version_dest)/glade;
+ 	@echo ""
+ 	@echo "Copying example files"
+-	cp -r -p $(top_srcdir)/bin/examples $(data_dest);
++	cp -r -p $(top_srcdir)/bin/examples $(DESTDIR)$(data_dest);
+ 	@echo ""
+ 	@echo "Copying file translators"
+-	cp -r -p $(top_srcdir)/openbabel/*.txt $(version_dest);
++	cp -r -p $(top_srcdir)/openbabel/*.txt $(DESTDIR)$(version_dest);
+ 	@echo ""
+ 	@echo "Copying help files"
+-	cp -r -p $(top_srcdir)/bin/user-docs/*.html $(gnome_help);
+-	cp -r -p $(top_srcdir)/bin/user-docs/*.jpg $(gnome_help);
++	cp -r -p $(top_srcdir)/bin/user-docs/*.html $(DESTDIR)$(gnome_help);
++	cp -r -p $(top_srcdir)/bin/user-docs/*.jpg $(DESTDIR)$(gnome_help);
+ 
+ timestamps:
+ 	@for i in $(SRCDIRS); do \

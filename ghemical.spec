@@ -60,7 +60,7 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 %configure
 #	--enable-mpqc
 
-# ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and gnome 1.x headers conflict
+# ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and GNOME 1.x headers conflict
 %{__make} \
 	CFLAGS="%{rpmcflags} -I/usr/include/python2.2/Numeric" \
 	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.2/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""

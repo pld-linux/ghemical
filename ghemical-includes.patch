@@ -1,0 +1,21 @@
+--- ./src/common/Makefile.in.org	Fri Jan 11 16:20:34 2002
++++ ./src/common/Makefile.in	Sun May 12 06:10:17 2002
+@@ -23,6 +23,8 @@
+ 		-I$(top_srcdir)/src/common \
+ 		-I$(top_srcdir)/openbabel \
+ 		-I$(top_builddir)/src \
++		-I/usr/X11R6/include \
++		-I/usr/include/python2.2/Numeric \
+ 		@SC_CPPFLAGS@
+ LIBS=		@LIBS@
+ DEFINES=	-DPRIMARY_PATH=\"$(PRIMARY_PATH)\" \
+--- ./miniMOPAC/Makefile.in.org	Thu May  3 18:52:58 2001
++++ ./miniMOPAC/Makefile.in	Sun May 12 06:11:29 2002
+@@ -15,6 +15,7 @@
+ RANLIB=         @RANLIB@
+ AR=             @AR@
+ 
++INCLUDES =	-I/usr/include/python2.2/Numeric
+ CFLAGS =	@CFLAGS@
+ 
+ SRC =		aababc.c addfck.c addhcr.c addnuc.c analyt.c \

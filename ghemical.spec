@@ -7,7 +7,7 @@ Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM
 Name:		ghemical
 Version:	0.90
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
@@ -62,8 +62,8 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 
 # ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and GNOME 1.x headers conflict
 %{__make} \
-	CFLAGS="%{rpmcflags} -I/usr/include/python2.2/Numeric" \
-	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.2/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""
+	CFLAGS="%{rpmcflags} -I/usr/include/python2.3/Numeric" \
+	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.3/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""
 
 %install
 rm -rf $RPM_BUILD_ROOT

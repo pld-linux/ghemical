@@ -1,13 +1,12 @@
 [Desktop Entry]
 Name=GHemical
 Comment=Molecules 3D drawing program
-Name[cs_CZ.ISO8859-2]=GHemical
-Comment[cs_CZ.ISO8859-2]=Editor molekul 3d
-Comment[de_DE.ISO8859-1]=Moleküleditor 3d
-Comment[pl_PL.ISO8859-2]=Edytor molekó³ 3d
+Comment[cs]=Editor molekul 3d
+Comment[de]=MolekÃ¼leditor 3d
+Comment[pl]=Edytor molekuÅ‚ 3d
 Exec=ghemical
 Icon=ghemical.xpm
 Terminal=false
 MultipleArgs=false
 Type=Application
-
+# vi: encoding=utf-8

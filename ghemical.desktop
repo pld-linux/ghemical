@@ -9,4 +9,5 @@ Icon=ghemical.xpm
 Terminal=false
 MultipleArgs=false
 Type=Application
+Encoding=UTF-8
 # vi: encoding=utf-8

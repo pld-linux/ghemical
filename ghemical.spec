@@ -3,8 +3,8 @@
 # - use external miniMOPAC (? included is modified, I think...)
 # - src/target3/open.o  - don't use tempnam
 
-Summary:	Ghemical - The MM and QM calculations frontend.
-Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM.
+Summary:	Ghemical - The MM and QM calculations frontend
+Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM
 Name:		ghemical
 Version:	0.82
 Release:	1
@@ -37,8 +37,15 @@ molecules). Also a tool for reduced protein models is included.
 Geometry optimization, molecular dynamics and a large set of
 visualization tools are currently available.
 
-# well... who will translate this? :)
-#%description -l pl
+%description -l pl
+Ghemical to pakiet oprogramowania obliczeniowego z zakresu chemii
+wypuszczony na licencji GNU GPL, napisany w C++. Ma graficzny
+interfejs u¿ytkownika (w rzeczywisto¶ci - kilka). Obs³uguje zarówno
+modele mechaniki kwantowej (semi-empiryzcne oraz ab initio) jak i
+modele mechaniki molekularnej (jest eksperymentalne pole si³y w stylu
+Tripos 5.2 dla cz±stek organicznych). Do³±czone jest tak¿e narzêdzie
+do uproszczonych modeli bia³ek. Dostêpne s± optymalizacja geometrii,
+dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 
 %prep
 %setup -q
@@ -66,14 +73,12 @@ install openbabel/*.txt				$RPM_BUILD_ROOT%{_pkgdir}
 install %{SOURCE1}				$RPM_BUILD_ROOT%{_applnkdir}/Scientific
 install %{SOURCE2}				$RPM_BUILD_ROOT%{_datadir}/pixmaps
 
-gzip -9nf AUTHORS BUGLIST CHANGES PROJECT
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz bin/examples/*
+%doc AUTHORS BUGLIST CHANGES PROJECT bin/examples/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/gnome/help/%{name}
 %{_datadir}/gnome/help/%{name}/C/*

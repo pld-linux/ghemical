@@ -7,11 +7,12 @@ Summary:	Ghemical - The MM and QM calculations frontend.
 Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM.
 Name:		ghemical
 Version:	0.82
-Release:	0.5
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
-Icon:		%{name}.xpm
+Source1:	%{name}.desktop
+Source2:	%{name}.xpm
 Patch0:		%{name}-includes.patch
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
@@ -62,8 +63,8 @@ install bin/parameters/mm1param/stable/*.txt	$RPM_BUILD_ROOT%{_pkgdir}/parameter
 install bin/parameters/mm1param/unstable/*.txt	$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm1param/unstable
 install bin/parameters/mm2param/*.txt		$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm2param
 install openbabel/*.txt				$RPM_BUILD_ROOT%{_pkgdir}
-#install %{SOURCE1}				$RPM_BUILD_ROOT%{_applnkdir}/Scientific
-#install %{ICON}		%{_datadir}/pixmaps/
+install %{SOURCE1}				$RPM_BUILD_ROOT%{_applnkdir}/Scientific
+install %{SOURCE2}				$RPM_BUILD_ROOT%{_datadir}/pixmaps
 
 gzip -9nf AUTHORS BUGLIST CHANGES PROJECT
 
@@ -78,5 +79,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome/help/%{name}/C/*
 %dir %{_pkgdir}
 %{_pkgdir}/*
-#%{_datadir}/pixmaps/*.xpm
-#%{_applnkdir}/Scientific/*.desktop
+%{_datadir}/pixmaps/*.xpm
+%{_applnkdir}/Scientific/*.desktop

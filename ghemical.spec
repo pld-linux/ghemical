@@ -24,7 +24,7 @@ BuildRequires:	gtkglarea-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	libglade-gnome-devel
 BuildRequires:	openbabel-devel
-Buildrequires:	python-numpy-devel
+BuildRequires:	python-numpy-devel
 Requires:	openbabel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

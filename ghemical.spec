@@ -1,16 +1,20 @@
 # TODO:
 # - use external openbabel (?)
+# - use external miniMOPAC (? included is modified, I think...)
+
 Summary:	Ghemical - The MM and QM calculations frontend.
 Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM.
 Name:		ghemical
 Version:	0.82
-Release:	0.3
+Release:	0.4
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
 Icon:		%{name}.xpm
+Patch0:		%{name}-miniMOPAC_fix.patch
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
+Buildrequires:	python-numpy-devel
 BuildRequires:	gcc-g77
 BuildRequires:	gtkglarea-devel
 BuildRequires:	gtk+-devel
@@ -34,10 +38,12 @@ visualization tools are currently available.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 autoconf
-%configure
+%configure 
+#	--enable-mpqc
 %{__make}
 
 %install

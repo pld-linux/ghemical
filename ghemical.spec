@@ -11,6 +11,7 @@ Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
+# Source0-md5:	a469e583af31c89146397f81aa88289c
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
 URL:		http://www.uku.fi/~thassine/ghemical/

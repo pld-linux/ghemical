@@ -45,7 +45,7 @@ visualization tools are currently available.
 %patch0 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure 
 #	--enable-mpqc
 %{__make}

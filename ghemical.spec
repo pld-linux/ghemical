@@ -14,6 +14,8 @@ Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
 # Source0-md5:	a469e583af31c89146397f81aa88289c
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
+Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-c++.patch
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
 BuildRequires:	gcc-g77
@@ -50,41 +52,38 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__autoconf}
 %configure 
 #	--enable-mpqc
+
+# ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and gnome 1.x headers conflict
 %{__make} \
 	CFLAGS="%{rpmcflags} -I/usr/include/python2.2/Numeric" \
-	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.2/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\""
+	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.2/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_applnkdir}/Scientific/Chemistry}
-install -d $RPM_BUILD_ROOT%{_datadir}/{gnome/help/%{name}/C,pixmaps}
-install -d $RPM_BUILD_ROOT%{_pkgdir}/parameters/{builder,mm2param,mm1param/{stable,unstable}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Scientific/Chemistry,%{_pixmapsdir}}
 
-install bin/%{name}	$RPM_BUILD_ROOT%{_bindir}
-install bin/user-docs/*	$RPM_BUILD_ROOT%{_datadir}/gnome/help/%{name}/C
-install bin/parameters/builder/*.txt		$RPM_BUILD_ROOT%{_pkgdir}/parameters/builder
-install bin/parameters/mm1param/stable/*.txt	$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm1param/stable
-install bin/parameters/mm1param/unstable/*.txt	$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm1param/unstable
-install bin/parameters/mm2param/*.txt		$RPM_BUILD_ROOT%{_pkgdir}/parameters/mm2param
-install openbabel/*.txt				$RPM_BUILD_ROOT%{_pkgdir}
-install %{SOURCE1}				$RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
-install %{SOURCE2}				$RPM_BUILD_ROOT%{_datadir}/pixmaps
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS BUGLIST CHANGES PROJECT bin/examples/*
 %attr(755,root,root) %{_bindir}/*
-%dir %{_datadir}/gnome/help/%{name}
-%{_datadir}/gnome/help/%{name}/C/*
-%dir %{_pkgdir}
-%{_pkgdir}/*
-%{_datadir}/pixmaps/*.xpm
+%{_pkgdir}
+%{_pixmapsdir}/*.xpm
 %{_applnkdir}/Scientific/Chemistry/*.desktop

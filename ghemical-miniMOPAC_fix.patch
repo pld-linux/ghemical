@@ -1,0 +1,12 @@
+--- ./miniMOPAC/Makefile.in.org	Sun May 12 04:25:07 2002
++++ ./miniMOPAC/Makefile.in	Sun May 12 04:26:04 2002
+@@ -15,7 +15,8 @@
+ RANLIB=         @RANLIB@
+ AR=             @AR@
+ 
+-CFLAGS =	@CFLAGS@
++INCLUDES =	/usr/include/python2.2/Numeric/
++CFLAGS =	@CFLAGS@ $(INCLUDES)
+ 
+ SRC =		aababc.c addfck.c addhcr.c addnuc.c analyt.c \
+ 		anavib.c axis.c  block.c  bonds.c  brlzon.c \

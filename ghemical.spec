@@ -57,7 +57,7 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 
 %build
 %{__autoconf}
-%configure 
+%configure
 #	--enable-mpqc
 
 # ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and gnome 1.x headers conflict

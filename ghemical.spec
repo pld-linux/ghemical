@@ -4,7 +4,7 @@
 # - use external openbabel
 
 Summary:	Ghemical - The MM and QM calculations frontend
-Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM
+Summary(pl):	Ghemical - frontend do obliczeñ MM oraz QM
 Name:		ghemical
 Version:	0.90
 Release:	2
@@ -18,9 +18,10 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-c++.patch
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	gcc-g77
 BuildRequires:	glut-devel
-BuildRequires:	gtkglarea-devel
+BuildRequires:	gtkglarea1-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	libglade-gnome-devel
 BuildRequires:	openbabel-devel
@@ -56,6 +57,7 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 %patch1 -p1
 
 %build
+cp -f /usr/share/automake/config.* .
 %{__autoconf}
 %configure
 #	--enable-mpqc
@@ -67,12 +69,12 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Scientific/Chemistry,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %find_lang %{name} --with-gnome
@@ -86,4 +88,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_pkgdir}
 %{_pixmapsdir}/*.xpm
-%{_applnkdir}/Scientific/Chemistry/*.desktop
+%{_desktopdir}/*.desktop

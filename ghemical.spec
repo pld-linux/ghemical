@@ -1,14 +1,17 @@
+# TODO:
+# - use external openbabel (?)
 Summary:	Ghemical - The MM and QM calculations frontend.
 Summary(pl):	Ghemical - Frontend do obliczeñ MM oraz QM.
 Name:		ghemical
 Version:	0.82
-Release:	0.2
+Release:	0.3
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
 Icon:		%{name}.xpm
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
+BuildRequires:	gcc-g77
 BuildRequires:	gtkglarea-devel
 BuildRequires:	gtk+-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)

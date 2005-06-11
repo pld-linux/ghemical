@@ -7,7 +7,7 @@ Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl):	Ghemical - frontend do obliczeñ MM oraz QM
 Name:		ghemical
 Version:	0.90
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
@@ -86,6 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BUGLIST CHANGES PROJECT bin/examples/*
 %attr(755,root,root) %{_bindir}/*
+%dir %{_datadir}/%{name}
 %{_pkgdir}
 %{_pixmapsdir}/*.xpm
 %{_desktopdir}/*.desktop

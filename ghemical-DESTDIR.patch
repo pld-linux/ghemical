@@ -1,5 +1,5 @@
---- ghemical-0.90/Makefile.in.orig	Mon Jun 17 11:52:19 2002
-+++ ghemical-0.90/Makefile.in	Fri Jun 27 14:45:34 2003
+--- ghemical-1.01/Makefile.in~	2002-12-03 07:44:52.000000000 +0000
++++ ghemical-1.01/Makefile.in	2005-06-12 00:37:10.564721376 +0000
 @@ -64,26 +64,26 @@
  	@echo ""
  	@echo "Creating directories (if needed)..."
@@ -24,14 +24,14 @@
 +	cp -r -p $(top_srcdir)/bin/examples $(DESTDIR)$(data_dest);
  	@echo ""
  	@echo "Copying file translators"
--	cp -r -p $(top_srcdir)/openbabel/*.txt $(version_dest);
-+	cp -r -p $(top_srcdir)/openbabel/*.txt $(DESTDIR)$(version_dest);
+-	cp -p $(top_srcdir)/openbabel/*.txt $(version_dest);
++	cp -p $(top_srcdir)/openbabel/*.txt $(DESTDIR)$(version_dest);
  	@echo ""
  	@echo "Copying help files"
--	cp -r -p $(top_srcdir)/bin/user-docs/*.html $(gnome_help);
--	cp -r -p $(top_srcdir)/bin/user-docs/*.jpg $(gnome_help);
-+	cp -r -p $(top_srcdir)/bin/user-docs/*.html $(DESTDIR)$(gnome_help);
-+	cp -r -p $(top_srcdir)/bin/user-docs/*.jpg $(DESTDIR)$(gnome_help);
- 
+-	cp -p $(top_srcdir)/bin/user-docs/*.html $(gnome_help);
+-	cp -p $(top_srcdir)/bin/user-docs/images/*.png $(gnome_help)/images;
++	cp -p $(top_srcdir)/bin/user-docs/*.html $(DESTDIR)$(gnome_help);
++	cp -p $(top_srcdir)/bin/user-docs/images/*.png $(DESTDIR)$(gnome_help)/images;
+ 	
  timestamps:
  	@for i in $(SRCDIRS); do \

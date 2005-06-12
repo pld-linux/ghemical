@@ -6,20 +6,19 @@
 Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl):	Ghemical - frontend do obliczeñ MM oraz QM
 Name:		ghemical
-Version:	0.90
-Release:	5
+Version:	1.01
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
-# Source0-md5:	a469e583af31c89146397f81aa88289c
+# Source0-md5:	41f7b6ce38b4a1be9a9cf00d7d068b4a
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
 Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-c++.patch
 URL:		http://www.uku.fi/~thassine/ghemical/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gcc-g77
+BuildRequires:	f2c
 BuildRequires:	glut-devel
 BuildRequires:	gtkglarea1-devel
 BuildRequires:	gtk+-devel
@@ -28,8 +27,6 @@ BuildRequires:	openbabel-devel
 BuildRequires:	python-numpy-devel
 Requires:	openbabel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_pkgdir		%{_datadir}/%{name}/%{version}
 
 %description
 Ghemical is a computational chemistry software package released under
@@ -54,7 +51,6 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 cp -f /usr/share/automake/config.* .
@@ -64,8 +60,8 @@ cp -f /usr/share/automake/config.* .
 
 # ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and GNOME 1.x headers conflict
 %{__make} \
-	CFLAGS="%{rpmcflags} -I/usr/include/python2.3/Numeric" \
-	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.3/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""
+	CFLAGS="%{rpmcflags} -I/usr/include/python2.4/Numeric" \
+	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.4/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,7 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BUGLIST CHANGES PROJECT bin/examples/*
 %attr(755,root,root) %{_bindir}/*
-%dir %{_datadir}/%{name}
-%{_pkgdir}
+%{_datadir}/%{name}
 %{_pixmapsdir}/*.xpm
 %{_desktopdir}/*.desktop

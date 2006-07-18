@@ -1,4 +1,5 @@
 # TODO:
+# - find better source of <f2c.h> (than python-Numeric)
 # - use external miniMOPAC (? included is modified, I think...)
 # - src/target3/open.o  - don't use tempnam
 # - use external openbabel
@@ -24,7 +25,8 @@ BuildRequires:	gtkglarea1-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	libglade-gnome-devel
 BuildRequires:	openbabel-devel
-BuildRequires:	python-numpy-devel
+# just for <f2c.h>
+BuildRequires:	python-Numeric-devel
 Requires:	openbabel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,6 +61,7 @@ cp -f /usr/share/automake/config.* .
 #	--enable-mpqc
 
 # ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and GNOME 1.x headers conflict
+# python/Numeric headers are used for f2c.h
 %{__make} \
 	CFLAGS="%{rpmcflags} -I/usr/include/python2.4/Numeric" \
 	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.4/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""

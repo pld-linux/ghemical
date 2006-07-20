@@ -11,12 +11,12 @@ Version:	1.01
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
-Source0:	http://www.uku.fi/~thassine/ghemical/download/%{name}-%{version}.tgz
+Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tgz
 # Source0-md5:	41f7b6ce38b4a1be9a9cf00d7d068b4a
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
 Patch0:		%{name}-DESTDIR.patch
-URL:		http://www.uku.fi/~thassine/ghemical/
+URL:		http://www.uku.fi/~thassine/projects/ghemical/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	f2c

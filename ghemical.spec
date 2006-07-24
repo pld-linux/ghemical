@@ -6,7 +6,7 @@ Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tar.gz
-# Source0-md5:	41f7b6ce38b4a1be9a9cf00d7d068b4a
+# Source0-md5:	7a160160c80f213b43485613a5ca2d75
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
 Patch0:		%{name}-link.patch

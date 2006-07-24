@@ -1,33 +1,29 @@
-# TODO:
-# - find better source of <f2c.h> (than python-Numeric)
-# - use external miniMOPAC (? included is modified, I think...)
-# - src/target3/open.o  - don't use tempnam
-# - use external openbabel
-
 Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl):	Ghemical - frontend do obliczeñ MM oraz QM
 Name:		ghemical
-Version:	1.01
+Version:	2.01
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
-Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tgz
+Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tar.gz
 # Source0-md5:	41f7b6ce38b4a1be9a9cf00d7d068b4a
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
-Patch0:		%{name}-DESTDIR.patch
+Patch0:		%{name}-link.patch
 URL:		http://www.uku.fi/~thassine/projects/ghemical/
-BuildRequires:	autoconf
+BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	OpenGL-glut-devel
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	f2c
-BuildRequires:	glut-devel
-BuildRequires:	gtkglarea1-devel
-BuildRequires:	gtk+-devel
-BuildRequires:	libglade-gnome-devel
-BuildRequires:	openbabel-devel
-# just for <f2c.h>
-BuildRequires:	python-Numeric-devel
-Requires:	openbabel
+BuildRequires:	glib2-devel >= 1:2.6.0
+BuildRequires:	gtk+2-devel >= 2:2.6.0
+BuildRequires:	gtkglext-devel >= 1.0.5
+BuildRequires:	libglade2-devel >= 2.4.0
+BuildRequires:	libghemical-devel >= 2.00
+BuildRequires:	libstdc++-devel
+BuildRequires:	openbabel-devel >= 2.0.0
+BuildRequires:	pkgconfig
+Requires:	openbabel >= 2.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,16 +51,15 @@ dynamika molekularna oraz du¿y zestaw narzêdzi do wizualizacji.
 %patch0 -p1
 
 %build
-cp -f /usr/share/automake/config.* .
+%{__libtoolize}
+%{__aclocal}
 %{__autoconf}
-%configure
-#	--enable-mpqc
+%{__autoheader}
+%{__automake}
+%configure \
+	--enable-openbabel
 
-# ENABLE_NLS and PACKAGE is workaround for g++ 3.3 and GNOME 1.x headers conflict
-# python/Numeric headers are used for f2c.h
-%{__make} \
-	CFLAGS="%{rpmcflags} -I/usr/include/python2.4/Numeric" \
-	CXXFLAGS="%{rpmcflags} -fno-exceptions %{!?debug:-DNO_DEBUG} -I/usr/X11R6/include -I/usr/include/python2.4/Numeric -DDATADIR=\\\"%{_datadir}/openbabel/\\\" -DENABLE_NLS -DPACKAGE=\\\"ghemical\\\""
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -76,14 +71,12 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-%find_lang %{name} --with-gnome
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
-%doc AUTHORS BUGLIST CHANGES PROJECT bin/examples/*
+%doc AUTHORS ChangeLog TODO examples
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_pixmapsdir}/*.xpm

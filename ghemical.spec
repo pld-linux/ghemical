@@ -1,5 +1,5 @@
 Summary:	Ghemical - The MM and QM calculations frontend
-Summary(pl.UTF-8):   Ghemical - frontend do obliczeń MM oraz QM
+Summary(pl.UTF-8):	Ghemical - frontend do obliczeń MM oraz QM
 Name:		ghemical
 Version:	2.10
 Release:	1

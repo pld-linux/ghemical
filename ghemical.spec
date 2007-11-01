@@ -1,16 +1,15 @@
 Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl.UTF-8):	Ghemical - frontend do obliczeń MM oraz QM
 Name:		ghemical
-Version:	2.10
+Version:	2.95
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
-Source0:	http://www.uku.fi/~thassine/projects/download/%{name}-%{version}.tar.gz
-# Source0-md5:	f5d641567b106bcb92e94ebce26463b9
+Source0:	http://bioinformatics.org/ghemical/download/current/%{name}-%{version}.tar.gz
+# Source0-md5:	262d546d7ceca078d0e12a99211d3734
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
-Patch0:		%{name}-link.patch
-URL:		http://www.uku.fi/~thassine/projects/ghemical/
+URL:		http://bioinformatics.org/ghemical/ghemical/index.html
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-glut-devel
 BuildRequires:	autoconf >= 2.50
@@ -20,6 +19,7 @@ BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	gtkglext-devel >= 1.0.5
 BuildRequires:	libglade2-devel >= 2.4.0
 BuildRequires:	libghemical-devel >= 2.10
+BuildRequires:	liboglappth-devel >= 0.95
 BuildRequires:	libstdc++-devel
 BuildRequires:	openbabel-devel >= 2.0.0
 BuildRequires:	pkgconfig
@@ -49,7 +49,6 @@ dynamika molekularna oraz duży zestaw narzędzi do wizualizacji.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -58,7 +57,9 @@ dynamika molekularna oraz duży zestaw narzędzi do wizualizacji.
 %{__autoheader}
 %{__automake}
 %configure \
-	--enable-openbabel
+	--enable-openbabel \
+	--enable-threads \
+	--enable-gtk
 
 %{__make}
 

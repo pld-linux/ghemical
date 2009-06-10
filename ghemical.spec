@@ -1,17 +1,17 @@
 Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl.UTF-8):	Ghemical - frontend do obliczeń MM oraz QM
 Name:		ghemical
-Version:	2.95
+Version:	2.98
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
 Source0:	http://bioinformatics.org/ghemical/download/current/%{name}-%{version}.tar.gz
-# Source0-md5:	262d546d7ceca078d0e12a99211d3734
+# Source0-md5:	e6bf63a004c4f162eb9a7838872f5a4c
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
 URL:		http://bioinformatics.org/ghemical/ghemical/index.html
-BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	OpenGL-glut-devel
+BuildRequires:	Mesa-libGLU-devel
+BuildRequires:	freeglut-devel
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 1:2.6.0
@@ -19,7 +19,7 @@ BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	gtkglext-devel >= 1.0.5
 BuildRequires:	libglade2-devel >= 2.4.0
 BuildRequires:	libghemical-devel >= 2.10
-BuildRequires:	liboglappth-devel >= 0.95
+BuildRequires:	liboglappth-devel >= 0.98
 BuildRequires:	libstdc++-devel
 BuildRequires:	openbabel-devel >= 2.0.0
 BuildRequires:	pkgconfig
@@ -49,6 +49,7 @@ dynamika molekularna oraz duży zestaw narzędzi do wizualizacji.
 
 %prep
 %setup -q
+%{__sed} -i -e 's/#include <gtk\/gtkgl.h>/#include <gtk\/gtkgl.h>\n#include <stdlib.h>\n#include <string.h>/g' src/pangofont_wcl.cpp
 
 %build
 %{__libtoolize}

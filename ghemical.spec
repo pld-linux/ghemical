@@ -1,30 +1,35 @@
 Summary:	Ghemical - The MM and QM calculations frontend
 Summary(pl.UTF-8):	Ghemical - frontend do obliczeń MM oraz QM
 Name:		ghemical
-Version:	2.98
+Version:	3.0.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Science
-Source0:	http://bioinformatics.org/ghemical/download/current/%{name}-%{version}.tar.gz
-# Source0-md5:	e6bf63a004c4f162eb9a7838872f5a4c
+Source0:	http://www.bioinformatics.org/ghemical/download/current/%{name}-%{version}.tar.gz
+# Source0-md5:	becf98626f0eba73f7f042bc92aa60ac
 Source1:	%{name}.desktop
 Source2:	%{name}.xpm
-URL:		http://bioinformatics.org/ghemical/ghemical/index.html
-BuildRequires:	Mesa-libGLU-devel
-BuildRequires:	freeglut-devel
+URL:		http://www.bioinformatics.org/ghemical/ghemical/index.html
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	freeglut-devel
 BuildRequires:	glib2-devel >= 1:2.6.0
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	gtkglext-devel >= 1.0.5
 BuildRequires:	libglade2-devel >= 2.4.0
-BuildRequires:	libghemical-devel >= 2.10
-BuildRequires:	liboglappth-devel >= 0.98
+BuildRequires:	libghemical-devel >= 3.0.0
+BuildRequires:	liboglappth-devel >= 1.0.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	openbabel-devel >= 2.0.0
 BuildRequires:	pkgconfig
+Requires:	glib2 >= 1:2.6.0
+Requires:	gtk+2 >= 2:2.6.0
+Requires:	gtkglext >= 1.0.5
+Requires:	libglade2 >= 2.4.0
+Requires:	libghemical >= 3.0.0
+Requires:	liboglappth >= 1.0.0
 Requires:	openbabel >= 2.0.0
-Requires:	libghemical >= 2.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,7 +54,6 @@ dynamika molekularna oraz duży zestaw narzędzi do wizualizacji.
 
 %prep
 %setup -q
-%{__sed} -i -e 's/#include <gtk\/gtkgl.h>/#include <gtk\/gtkgl.h>\n#include <stdlib.h>\n#include <string.h>/g' src/pangofont_wcl.cpp
 
 %build
 %{__libtoolize}
@@ -80,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog TODO examples
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/ghemical
 %{_datadir}/%{name}
-%{_pixmapsdir}/*.xpm
-%{_desktopdir}/*.desktop
+%{_pixmapsdir}/ghemical.xpm
+%{_desktopdir}/ghemical.desktop
